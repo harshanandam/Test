@@ -40,6 +40,7 @@ public with sharing class GenericDataTable_Nandam {
         CountQuery1 += ' WHERE isActive = false ';
 
     }
+    system.debug('test');
 
     if(SearchString != '' || FieldName != 'All' || ProfileFilter != 'All Profiles'){
        // Query += ' AND ';
