@@ -1,0 +1,19 @@
+<template>
+    <lightning-card>
+    <p> For Sample User upload file, please <a href="#" onclick={handleClick}>click here</a></p>
+    <template if:true={ShowRequiredFieldsBlock}>
+        <div >
+                <ul>
+                    <li>Required Fields : <b>{myFields}</b></li>
+                </ul>
+            </div>  
+    </template> 
+    <lightning-file-upload
+            label="Attach receipt"
+            name="fileUploader" 
+            accept={acceptedFormats}
+            record-id={myRecordId}
+            onuploadfinished={handleUploadFinished}></lightning-file-upload>
+
+        </lightning-card>
+</template>

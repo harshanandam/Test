@@ -1,0 +1,171 @@
+<template>
+
+    <lightning-card title="" icon-name="custom:custom19">
+        <center>
+            <div>
+                <ul>
+                    <li>Entered sObject : <b>{sObject}</b></li>
+                    <li>Entered Fields : <b>{Fields}</b></li>
+                </ul>
+            </div>
+        </center>
+    </lightning-card>
+    
+            <lightning-card title="">
+
+                <center>
+            
+                    <lightning-button label="Create User" onclick={handleCreateUser} ></lightning-button>
+                    <lightning-button label="Reset Password" onclick={resetPasswordForUser} ></lightning-button>
+                    <lightning-button label="Activate" onclick={activateUsersList} ></lightning-button>
+                    <lightning-button label="Deactivate" onclick={deactivateUsersList} ></lightning-button>
+                    <lightning-button label="Update User(s)" onclick={handleUpdateUsers} ></lightning-button>
+                </center>
+
+                <div class="slds-grid" >
+
+
+                    <div class="slds-col slds-size_1-of-12 slds-container--left">
+                        <lightning-combobox
+                                name="progress"
+                                value={FieldFilter}
+                                placeholder="Field Filter"
+                                options={filters}
+                                onchange={handleFieldChange}
+                                variant="label-stacked" >
+                        </lightning-combobox>
+                    </div>
+                        <div class="slds-col slds-size_2-of-12 slds-container--left">
+                        <lightning-combobox
+                                name="progress"
+                                value={ProfileFilter}
+                                placeholder="Profile"
+                                options={profilefilters}
+                                onchange={handleProfileChange}
+                                variant="label-stacked" >
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12 slds-container--left">
+                        <lightning-combobox
+                                name="progress"
+                                value={ActiveFilter}
+                                placeholder="Active"
+                                options={activeFilters}
+                                onchange={handleActiveChange}
+                                variant="label-stacked" >
+                        </lightning-combobox>
+                    </div>
+                    
+        
+                    <div class="slds-col slds-size_2-of-12 slds-container--left">
+                    <lightning-input type="text" placeholder="Search" value={SearchText} onchange={Search}>
+                    </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-12 slds-container--right">
+                    <lightning-combobox
+                            label="Items Per Page"
+                            name="progress"
+                            value={value}
+                            placeholder="Select Number Of Records to Display"
+                            options={options}
+                            onchange={handleChange}
+                            variant="label-stacked" >
+                    </lightning-combobox>
+                </div>
+                
+                                
+                    </div>
+
+                    
+                <lightning-datatable
+                    data={act_data}
+                    columns={columns}
+                    key-field="Id"
+                    onsort={handleSortdata}
+                    sorted-by={sortBy}
+                    sorted-direction={sortDirection}
+                    onrowselection={getSelectedName}
+                    onrowaction={LaunchFlow}
+                    draft-values={draftValues}
+                    onsave={updateUserjs}
+                    selected-rows={selectedRows}
+                    >
+                </lightning-datatable>
+
+    
+                <div if:false={isLoaded}>
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+                
+                <div class="slds-align_absolute-center">
+
+                <lightning-button label="First" onclick={handleFirst} disabled={DisableFirst}></lightning-button>    
+
+                <lightning-button label="Previous" onclick={handlePrevious} disabled={DisablePrevious}>
+                </lightning-button>
+
+                <lightning-button label="Next" onclick={handleNext} disabled={DisableNext}>
+                </lightning-button>
+
+                <lightning-button label="Last" onclick={handleLast} disabled={DisabledLast}>
+
+                </lightning-button>
+
+                </div>
+    
+
+    
+                <p>Showing Page <b>{PageNumber}</b> of <b>{TotalPageNumbers}</b></p>
+                <p>Showing <b>{StartingRecord}</b> to <b>{EndingRecord}</b> of <b>{totalRecords}</b> entries</p>
+    
+    
+    
+            </lightning-card> 
+
+            <template if:true={openmodel}>
+                <div class="demo-only" style="height: 100%;">
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                    <lightning-icon style="background-color: white;" icon-name="utility:close" size="medium">
+                                    </lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Select the Choice</h2>
+                            </header>
+                            <div class="slds-modal__content slds-m-around_none" id="modal-content-id-1">
+                                <template if:true={radioShowButton}>
+
+                                    <div class="slds-m-around_none modal-body">
+                                        <lightning-radio-group name="radioGroup"
+                                            label="Radio Group"
+                                            options={radiooptions}
+                                            value={radiovalue}
+                                            type="radio">
+                                        </lightning-radio-group>
+                                     </div>
+                                </template>       
+                                <template if:false={radioShowButton}>
+                                    <template if:true={ShowSelect}>
+                                        <c-user-create-multiple-lwc> </c-user-create-multiple-lwc>
+                                    </template>
+                                    <template if:false={ShowSelect}>
+                                    </template>
+                                </template>
+                                
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <button class="slds-button slds-button_neutral" onclick={handleUserSelection}>Next</button>
+                                <button class="slds-button slds-button_neutral" >Cancel</button>
+                             </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </div>
+                </template>
+    
+            
+    
+        </template>

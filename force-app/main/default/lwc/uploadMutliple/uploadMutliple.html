@@ -1,0 +1,65 @@
+<template>
+    <p> For sample User Data CSV file, please click <a onclick={downloadCsv}>here</a></p>
+        <lightning-card >
+            <div>
+                
+
+            </div>
+
+                <!--<div class="slds-notify_container slds-is-relative">
+                        <div class={mainDivClass} role="status">
+                            <span class="slds-assistive-text">{variant}</span>
+                            <span class={messageDivClass} title={message}>
+                                <lightning-icon icon-name={iconName} size="small" variant="inverse"></lightning-icon>
+                              </span>     
+                            <div class="slds-notify__content">
+                                <h2 class="slds-text-heading_small,background:red" style="background-color: brown;color:white;">{msg}</h2>
+                                <h2 class="slds-text-heading_small,background:red" style="background-color: brown;color:white;">{msg1}</h2>
+                            </div>
+                            <div class="slds-notify__close">
+                                <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick={closeModel}>
+                                    <lightning-icon icon-name="utility:close" size="small" variant="inverse"> </lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                            </div> 
+                            
+                           
+                        </div>
+                    </div> -->
+            <div>
+                <template if:true={ShowRequiredFieldsBlock}>
+                         
+
+                <div >
+                        <ul>
+                            <li>Required Fields : <b>{mydata}</b></li>
+                        </ul>
+                    </div>  
+                <!--   <div>{mydata}</div>   -->         
+                </template>                             
+            </div>
+            <template if:true={showUploadIcon}>
+                <lightning-file-upload
+    
+                label="Upload .csv file to create users"
+    
+                name="fileUploader"
+    
+                accept={acceptedFormats}
+    
+                record-id={loggedinuserId}
+    
+                onuploadfinished={handleUploadFinished}>
+    
+        </lightning-file-upload>
+            </template>
+        
+</lightning-card>
+
+
+
+
+
+       
+
+</template>
