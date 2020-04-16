@@ -3,9 +3,9 @@ public with sharing class GenericDataTable_Nandam {
     Public static QueryDetails getFieldsList(String sobj, String Fields, String OrdBy, String sortorder,String SearchString, Integer LIM, Integer offset, String FieldName, String ProfileFilter, String ActiveFilter) {
 
 
-        VisibleProfiles__mdt[] visibleProfiles = [SELECT MasterLabel, Not_To_Be_Seen__c  FROM VisibleProfiles__mdt];
+        //VisibleProfiles__mdt[] visibleProfiles = [SELECT MasterLabel, Not_To_Be_Seen__c  FROM VisibleProfiles__mdt];
 
-        system.debug('visibleProfiles------->>>>>' +visibleProfiles);
+       // system.debug('visibleProfiles------->>>>>' +visibleProfiles);
 
 
         String ObjType = sobj;
